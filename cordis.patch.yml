@@ -1,0 +1,34 @@
+# The layer this bundle contributes when a profile lists it.
+#
+# Both providers register under the id `firecrawl`, one per capability
+# registry, and both are pinned explicitly: the built-in DeepSeek search
+# provider stays mounted, so leaving `searchProvider` unset would resolve as
+# WEB_PROVIDER_AMBIGUOUS rather than first-wins.
+- id: web
+  name: '@deepseek-ai/dsh-web'
+  config:
+    searchProvider: firecrawl
+    fetchProvider: firecrawl
+
+# The base bundle ships `fetch: false` and mounts no fetch provider, because the
+# local HTTP provider defers SSRF protection and the model chooses the request
+# target. Firecrawl retrieves from its own infrastructure, so the harness
+# process never opens the model-chosen connection — that is what makes enabling
+# `web_fetch` here a different decision from enabling it there.
+#
+# Both budgets are raised to 60s to cover a Firecrawl render round-trip; the
+# provider-neutral tool default is 30s.
+- id: tool-web
+  name: '@deepseek-ai/dsh-tool-web'
+  config:
+    search: true
+    fetch: true
+    searchTimeoutMs: 60000
+    fetchTimeoutMs: 60000
+
+- insert:
+    - id: web-search-firecrawl
+      name: 'dsh-firecrawl'
+
+    - id: web-fetch-firecrawl
+      name: 'dsh-firecrawl/fetch'

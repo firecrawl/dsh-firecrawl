@@ -1,0 +1,13 @@
+packages:
+  - .
+
+# pnpm 11 fails closed for dependency lifecycle scripts. Match the published
+# DSH workspace's reviewed decisions for the exact rc.6 CLI closure.
+allowBuilds:
+  esbuild: true
+  '@deepseek-ai/dsh-subprocess-local': true
+  node-pty: true
+  koffi: true
+  '@google/genai': false
+  protobufjs: false
+  node-addon-require-builtin: false
