@@ -52,17 +52,42 @@ Then install the plugin into the `web` profile:
 
 ```sh
 npx --yes @deepseek-ai/dsh@0.1.0-rc.6 \
-  plugin --profile web add \
-  "github:firecrawl/dsh-firecrawl#main"
+  plugin --profile web add dsh-firecrawl
 ```
-
-For a reproducible install, replace `main` with a full commit SHA.
 
 Stop any running Harness process, then start it again:
 
 ```sh
 npx --yes @deepseek-ai/dsh@0.1.0-rc.6 web
 ```
+
+### Installing from Git instead
+
+The published package ships `lib/` prebuilt, so it installs with no extra
+flags. A Git install does not — it has to run this package's `prepare` script
+to build, and pnpm 11 blocks build scripts for Git dependencies until you name
+the dependency exactly.
+
+`--allow-build=dsh-firecrawl` is **not** sufficient: pnpm wants the fully
+resolved Git key, including the commit SHA. Run the install once to have pnpm
+print that key:
+
+```sh
+npx --yes @deepseek-ai/dsh@0.1.0-rc.6 \
+  plugin --profile web add "github:firecrawl/dsh-firecrawl#main"
+```
+
+It fails with `ERR_PNPM_GIT_DEP_PREPARE_NOT_ALLOWED` and prints the exact line
+to add under `allowBuilds` in `~/.dsh/profiles/web/pnpm-workspace.yaml`:
+
+```yaml
+allowBuilds:
+  dsh-firecrawl@git+https://github.com/firecrawl/dsh-firecrawl.git#<sha>: true
+```
+
+Add it, re-run the same command, and it succeeds. Note the key is SHA-pinned,
+so it changes every time you update — which is why the npm install above is the
+recommended path.
 
 ## Check that it worked
 
@@ -167,8 +192,11 @@ stored as readable text.
   the same terminal that started Harness.
 - **`WEB_PROVIDER_AMBIGUOUS`:** something removed the `searchProvider` pin
   while more than one provider is usable. Restore it.
-- **pnpm reports missing DSH peer dependencies:** expected for a Git install.
-  Harness supplies those packages from the profile runtime.
+- **`ERR_PNPM_GIT_DEP_PREPARE_NOT_ALLOWED`:** you are installing from Git. See
+  [Installing from Git](#installing-from-git-instead) — the npm install avoids
+  this entirely.
+- **pnpm reports missing DSH peer dependencies:** expected. Harness supplies
+  those packages from the profile runtime.
 - **Harness answers without searching:** the model decides when to call
   `web_search`. Try a prompt that clearly needs current information.
 
