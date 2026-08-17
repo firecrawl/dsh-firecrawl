@@ -1,13 +1,13 @@
 /**
- * `dsh-firecrawl`: registers a Firecrawl-backed `WebSearchProvider` with
+ * `@firecrawl/dsh-firecrawl`: registers a Firecrawl-backed `WebSearchProvider` with
  * `ctx.web`. A function/namespace plugin (NOT a default-export service): a
  * search provider does not own the `ctx.web` key — it registers INTO the seam's
  * provider registry. The key is owned by `@deepseek-ai/dsh-web`.
  *
- * The matching fetch provider is a separate plugin at `dsh-firecrawl/fetch`, so
+ * The matching fetch provider is a separate plugin at `@firecrawl/dsh-firecrawl/fetch`, so
  * a deployment can mount either capability alone.
  *
- * @module dsh-firecrawl
+ * @module @firecrawl/dsh-firecrawl
  */
 
 import type { Context } from '@deepseek-ai/cordis'

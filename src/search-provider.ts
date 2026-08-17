@@ -3,7 +3,7 @@
  * `POST /v2/search`. It maps `data.web[]` and (when enabled) `data.news[]` into
  * the seam's normalized `WebSearchResult`, and omits `content` because
  * Firecrawl search returns no generated answer.
- * @module dsh-firecrawl/search-provider
+ * @module @firecrawl/dsh-firecrawl/search-provider
  */
 
 import type {

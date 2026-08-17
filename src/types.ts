@@ -3,7 +3,7 @@
  * The full response carries more (screenshots, links, audio/video, credit
  * accounting); anything not mapped into the seam's vocabulary stays out of this
  * file so an unused field never looks load-bearing.
- * @module dsh-firecrawl/types
+ * @module @firecrawl/dsh-firecrawl/types
  */
 
 /** One `data.web[]` entry of `POST /v2/search`. */

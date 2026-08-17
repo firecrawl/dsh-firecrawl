@@ -1,9 +1,9 @@
 /**
- * `dsh-firecrawl/fetch`: registers a Firecrawl-backed `WebFetchProvider` with
+ * `@firecrawl/dsh-firecrawl/fetch`: registers a Firecrawl-backed `WebFetchProvider` with
  * `ctx.web`. A function/namespace plugin registering INTO the seam's fetch
  * registry, exactly as the search entry registers into the search registry.
  *
- * @module dsh-firecrawl/fetch
+ * @module @firecrawl/dsh-firecrawl/fetch
  */
 
 import type { Context } from '@deepseek-ai/cordis'

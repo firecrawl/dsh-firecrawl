@@ -2,7 +2,7 @@
  * Shared transport for both Firecrawl-backed providers: one credential-bearing
  * POST, one error vocabulary. Kept in its own module so the redirect policy and
  * the abort/error classification cannot drift between search and fetch.
- * @module dsh-firecrawl/http
+ * @module @firecrawl/dsh-firecrawl/http
  */
 
 import { WebError } from '@deepseek-ai/dsh-web'
@@ -14,7 +14,7 @@ export const FIRECRAWL_DEFAULT_BASE_URL = 'https://api.firecrawl.dev'
 export const FIRECRAWL_PROVIDER_ID = 'firecrawl'
 
 /** Attribution header sent on every request. Bump with the package version. */
-export const USER_AGENT = 'dsh-firecrawl/0.1.0 (+https://github.com/firecrawl/dsh-firecrawl)'
+export const USER_AGENT = '@firecrawl/dsh-firecrawl/0.1.0 (+https://github.com/firecrawl/dsh-firecrawl)'
 
 /** A Firecrawl response envelope: `success` plus the failure detail fields. */
 interface Envelope {

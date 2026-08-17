@@ -28,7 +28,7 @@
 
 - insert:
     - id: web-search-firecrawl
-      name: 'dsh-firecrawl'
+      name: '@firecrawl/dsh-firecrawl'
 
     - id: web-fetch-firecrawl
-      name: 'dsh-firecrawl/fetch'
+      name: '@firecrawl/dsh-firecrawl/fetch'

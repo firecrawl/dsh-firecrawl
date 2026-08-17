@@ -52,7 +52,7 @@ Then install the plugin into the `web` profile:
 
 ```sh
 npx --yes @deepseek-ai/dsh@0.1.0-rc.6 \
-  plugin --profile web add dsh-firecrawl
+  plugin --profile web add @firecrawl/dsh-firecrawl
 ```
 
 Stop any running Harness process, then start it again:
@@ -68,7 +68,7 @@ flags. A Git install does not — it has to run this package's `prepare` script
 to build, and pnpm 11 blocks build scripts for Git dependencies until you name
 the dependency exactly.
 
-`--allow-build=dsh-firecrawl` is **not** sufficient: pnpm wants the fully
+`--allow-build=@firecrawl/dsh-firecrawl` is **not** sufficient: pnpm wants the fully
 resolved Git key, including the commit SHA. Run the install once to have pnpm
 print that key:
 
@@ -82,7 +82,7 @@ to add under `allowBuilds` in `~/.dsh/profiles/web/pnpm-workspace.yaml`:
 
 ```yaml
 allowBuilds:
-  dsh-firecrawl@git+https://github.com/firecrawl/dsh-firecrawl.git#<sha>: true
+  "@firecrawl/dsh-firecrawl@git+https://github.com/firecrawl/dsh-firecrawl.git#<sha>": true
 ```
 
 Add it, re-run the same command, and it succeeds. Note the key is SHA-pinned,
@@ -96,7 +96,7 @@ Inspect the composed profile:
 ```sh
 npx --yes @deepseek-ai/dsh@0.1.0-rc.6 \
   --profile web --dump-config | \
-  grep -E 'searchProvider: firecrawl|fetchProvider: firecrawl|dsh-firecrawl'
+  grep -E 'searchProvider: firecrawl|fetchProvider: firecrawl|@firecrawl/dsh-firecrawl'
 ```
 
 You should see both provider pins and the two plugin rows:
@@ -105,9 +105,9 @@ You should see both provider pins and the two plugin rows:
     searchProvider: firecrawl
     fetchProvider: firecrawl
 - id: web-search-firecrawl
-  name: dsh-firecrawl
+  name: "@firecrawl/dsh-firecrawl"
 - id: web-fetch-firecrawl
-  name: dsh-firecrawl/fetch
+  name: "@firecrawl/dsh-firecrawl/fetch"
 ```
 
 Seeing the built-in `web-search-deepseek` plugin as well is normal — the
@@ -204,7 +204,7 @@ stored as readable text.
 
 ```sh
 npx --yes @deepseek-ai/dsh@0.1.0-rc.6 \
-  plugin --profile web remove dsh-firecrawl
+  plugin --profile web remove @firecrawl/dsh-firecrawl
 ```
 
 Restart Harness after removing the plugin.

@@ -3,7 +3,7 @@
  * `POST /v2/scrape`. Retrieval happens on Firecrawl's infrastructure, so the
  * harness process never opens a model-chosen connection itself — the reason
  * `web_fetch` ships disabled with the local HTTP provider.
- * @module dsh-firecrawl/fetch-provider
+ * @module @firecrawl/dsh-firecrawl/fetch-provider
  */
 
 import { WebError } from '@deepseek-ai/dsh-web'
