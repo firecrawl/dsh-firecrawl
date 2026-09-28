@@ -58,8 +58,8 @@
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "4.0.1",
-    "@deepseek-ai/dsh-launch-environment": "0.1.0-rc.6",
-    "@deepseek-ai/dsh-web": "0.1.0-rc.6"
+    "@deepseek-ai/dsh-launch-environment": ">=0.1.0-rc.6 <0.2.1-0",
+    "@deepseek-ai/dsh-web": ">=0.1.0-rc.6 <0.2.1-0"
   },
   "dependencies": {
     "@deepseek-ai/schemastery": "3.18.1"
