@@ -8,7 +8,7 @@
 import { readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import yaml from 'js-yaml'
+import { load } from 'js-yaml'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const manifest = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'))
@@ -22,7 +22,7 @@ function check(condition, message) {
 check(typeof patchPath === 'string', 'package.json must declare dsh.bundle.patch — without it `dsh plugin add` activates no layer')
 check(manifest.files?.includes('cordis.patch.yml'), 'files[] must ship cordis.patch.yml')
 
-const patch = yaml.load(readFileSync(join(root, patchPath.replace(/^\.\//, '')), 'utf8'))
+const patch = load(readFileSync(join(root, patchPath.replace(/^\.\//, '')), 'utf8'))
 check(Array.isArray(patch), 'the patch must be a YAML array of rows')
 
 const rows = patch.flatMap(entry => Array.isArray(entry?.insert) ? entry.insert : [entry])
@@ -47,8 +47,8 @@ check(web !== undefined, 'the patch must pin the web seam row')
 check(web?.config?.searchProvider === providerId, `web.searchProvider must be "${providerId}"`)
 check(web?.config?.fetchProvider === providerId, `web.fetchProvider must be "${providerId}"`)
 
-// The base bundle ships `fetch: false`; shipping a fetch provider without
-// flipping it would register a provider no tool can reach.
+// Keep fetch on explicitly so the fetch provider stays reachable if a base
+// bundle default changes.
 const toolWeb = rows.find(row => row.id === 'tool-web')
 check(toolWeb?.config?.fetch === true, 'tool-web.fetch must be true, or the fetch provider is unreachable')
 

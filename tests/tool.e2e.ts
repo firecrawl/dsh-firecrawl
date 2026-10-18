@@ -10,7 +10,7 @@
  */
 
 import { Context } from '@deepseek-ai/cordis'
-import { CallId } from '@deepseek-ai/dsh-llm'
+import { ToolCallId } from '@deepseek-ai/dsh-llm'
 import SystemPromptRuntime from '@deepseek-ai/dsh-system-prompt'
 import ToolRuntime from '@deepseek-ai/dsh-tools'
 import * as toolWeb from '@deepseek-ai/dsh-tool-web'
@@ -29,7 +29,7 @@ const apiKey: string = envKey
 async function harness(): Promise<Context> {
   const ctx = new Context()
   await ctx.plugin(ToolRuntime, {})
-  await ctx.plugin(SystemPromptRuntime, { persona: '' })
+  await ctx.plugin(SystemPromptRuntime, { personaPrefix: '' })
   await ctx.plugin(WebRuntime, { searchProvider: 'firecrawl', fetchProvider: 'firecrawl' })
   await ctx.plugin(searchPlugin, { apiKey })
   await ctx.plugin(fetchPlugin, { apiKey })
@@ -40,7 +40,7 @@ async function harness(): Promise<Context> {
 let call = 0
 function invoke(ctx: Context, name: string, args: unknown) {
   return ctx.tools.execute({
-    callId: CallId(`live-${call += 1}`),
+    callId: ToolCallId(`live-${call += 1}`),
     name,
     arguments: args,
     signal: new AbortController().signal,
@@ -66,7 +66,7 @@ describe('model-facing tool surface', () => {
 
   it('answers a live web_search call with rendered sources', async () => {
     const ctx = await harness()
-    const result = await invoke(ctx, 'web_search', { query: 'Firecrawl web scraping API' })
+    const result = await invoke(ctx, 'web_search', { queries: ['Firecrawl web scraping API'] })
 
     expect(result.isError).toBe(false)
     const rendered = text(result.content)
@@ -80,7 +80,7 @@ describe('model-facing tool surface', () => {
     const result = await invoke(ctx, 'web_fetch', { url: 'https://example.com' })
 
     expect(result.isError).toBe(false)
-    expect(text(result.content)).toContain('Example Domain')
+    expect(text(result.content)).toContain('documentation examples')
     report('web_fetch', { chars: text(result.content).length })
   }, 90_000)
 
