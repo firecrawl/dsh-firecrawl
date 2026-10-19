@@ -13,6 +13,7 @@ import type {
   WebSearchSource,
 } from '@deepseek-ai/dsh-web'
 import {
+  FIRECRAWL_INTEGRATION,
   FIRECRAWL_PROVIDER_ID,
   isPositiveInteger,
   isValidBaseUrl,
@@ -117,6 +118,7 @@ export function buildSearchBody(
     query: request.query,
     sources: [...options.sources],
     timeout: options.timeoutMs,
+    integration: FIRECRAWL_INTEGRATION,
     ...limit !== undefined ? { limit } : {},
     ...options.includeDomains !== undefined ? { includeDomains: [...options.includeDomains] } : {},
     ...options.excludeDomains !== undefined ? { excludeDomains: [...options.excludeDomains] } : {},

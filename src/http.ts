@@ -14,7 +14,10 @@ export const FIRECRAWL_DEFAULT_BASE_URL = 'https://api.firecrawl.dev'
 export const FIRECRAWL_PROVIDER_ID = 'firecrawl'
 
 /** Attribution header sent on every request. Bump with the package version. */
-export const USER_AGENT = '@firecrawl/dsh-firecrawl/0.1.0 (+https://github.com/firecrawl/dsh-firecrawl)'
+export const USER_AGENT = '@firecrawl/dsh-firecrawl/0.1.1 (+https://github.com/firecrawl/dsh-firecrawl)'
+
+/** Integration tag sent in every request body so Firecrawl can attribute DSH traffic. */
+export const FIRECRAWL_INTEGRATION = '_dsh'
 
 /** A Firecrawl response envelope: `success` plus the failure detail fields. */
 interface Envelope {

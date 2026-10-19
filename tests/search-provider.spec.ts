@@ -60,11 +60,12 @@ describe('availability', () => {
 })
 
 describe('request body', () => {
-  it('sends the query, sources, and timeout', () => {
+  it('sends the query, sources, timeout, and integration', () => {
     expect(buildSearchBody({ query: 'harness' }, options())).toEqual({
       query: 'harness',
       sources: ['web'],
       timeout: 60_000,
+      integration: '_dsh',
     })
   })
 

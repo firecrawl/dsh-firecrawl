@@ -14,6 +14,7 @@ import type {
   WebFetchResult,
 } from '@deepseek-ai/dsh-web'
 import {
+  FIRECRAWL_INTEGRATION,
   FIRECRAWL_PROVIDER_ID,
   isPositiveInteger,
   isValidBaseUrl,
@@ -145,6 +146,7 @@ export function buildScrapeBody(
     blockAds: options.blockAds,
     proxy: options.proxy,
     timeout: options.timeoutMs,
+    integration: FIRECRAWL_INTEGRATION,
   }
 }
 

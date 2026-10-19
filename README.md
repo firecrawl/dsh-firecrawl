@@ -4,7 +4,8 @@ This plugin points DeepSeek Harness's built-in `web_search` **and** `web_fetch`
 tools at [Firecrawl](https://firecrawl.dev). It adds no new tools — the model
 keeps asking for a query or a URL exactly as before, and Firecrawl answers.
 
-It supports `@deepseek-ai/dsh@0.1.0-rc.6` on Node.js `^22.19.0 || >=24.0.0`.
+It supports `@deepseek-ai/dsh` `0.1.0-rc.6` through `0.2.1` (tested on
+`0.2.1-rc.2`) on Node.js `^22.19.0 || >=24.0.0`.
 DeepSeek Harness is still a developer preview, so later versions may need a
 plugin update.
 
@@ -51,14 +52,14 @@ export FIRECRAWL_API_KEY="fc-your-key"
 Then install the plugin into the `web` profile:
 
 ```sh
-npx --yes @deepseek-ai/dsh@0.1.0-rc.6 \
+npx --yes @deepseek-ai/dsh@0.2.1-rc.2 \
   plugin --profile web add @firecrawl/dsh-firecrawl
 ```
 
 Stop any running Harness process, then start it again:
 
 ```sh
-npx --yes @deepseek-ai/dsh@0.1.0-rc.6 web
+npx --yes @deepseek-ai/dsh@0.2.1-rc.2 web
 ```
 
 ### Installing from Git instead
@@ -73,7 +74,7 @@ resolved Git key, including the commit SHA. Run the install once to have pnpm
 print that key:
 
 ```sh
-npx --yes @deepseek-ai/dsh@0.1.0-rc.6 \
+npx --yes @deepseek-ai/dsh@0.2.1-rc.2 \
   plugin --profile web add "github:firecrawl/dsh-firecrawl#main"
 ```
 
@@ -94,7 +95,7 @@ recommended path.
 Inspect the composed profile:
 
 ```sh
-npx --yes @deepseek-ai/dsh@0.1.0-rc.6 \
+npx --yes @deepseek-ai/dsh@0.2.1-rc.2 \
   --profile web --dump-config | \
   grep -E 'searchProvider: firecrawl|fetchProvider: firecrawl|@firecrawl/dsh-firecrawl'
 ```
@@ -203,7 +204,7 @@ stored as readable text.
 ## Remove
 
 ```sh
-npx --yes @deepseek-ai/dsh@0.1.0-rc.6 \
+npx --yes @deepseek-ai/dsh@0.2.1-rc.2 \
   plugin --profile web remove @firecrawl/dsh-firecrawl
 ```
 

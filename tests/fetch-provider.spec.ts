@@ -99,7 +99,7 @@ describe('local URL admission', () => {
 })
 
 describe('request body', () => {
-  it('sends the URL, format, and retrieval knobs', () => {
+  it('sends the URL, format, retrieval knobs, and integration', () => {
     expect(buildScrapeBody({ url: 'https://a.test' }, options())).toEqual({
       url: 'https://a.test',
       formats: ['markdown'],
@@ -110,6 +110,7 @@ describe('request body', () => {
       blockAds: true,
       proxy: 'auto',
       timeout: 60_000,
+      integration: '_dsh',
     })
   })
 
