@@ -10,14 +10,14 @@
     searchProvider: firecrawl
     fetchProvider: firecrawl
 
-# The base bundle ships `fetch: false` and mounts no fetch provider, because the
-# local HTTP provider defers SSRF protection and the model chooses the request
-# target. Firecrawl retrieves from its own infrastructure, so the harness
-# process never opens the model-chosen connection — that is what makes enabling
-# `web_fetch` here a different decision from enabling it there.
+# Both tools stay on, now backed by Firecrawl. Firecrawl retrieves from its own
+# infrastructure, so the harness process never opens the model-chosen
+# connection.
 #
 # Both budgets are raised to 60s to cover a Firecrawl render round-trip; the
-# provider-neutral tool default is 30s.
+# provider-neutral tool default is 30s. The Web profile disables this host row
+# and composes its own `tool-web` per agent preset, so this applies to the
+# profiles that mount the row directly.
 - id: tool-web
   name: '@deepseek-ai/dsh-tool-web'
   config:

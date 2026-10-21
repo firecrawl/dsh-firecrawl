@@ -1,7 +1,7 @@
 {
   "name": "@firecrawl/dsh-firecrawl",
   "description": "Firecrawl-backed search and fetch providers for the DeepSeek Harness web capability seam (ctx.web)",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Firecrawl <support@firecrawl.dev>",
   "license": "MIT",
   "type": "module",
@@ -57,25 +57,25 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "@deepseek-ai/cordis": "4.0.1",
-    "@deepseek-ai/dsh-launch-environment": "0.1.0-rc.6",
-    "@deepseek-ai/dsh-web": "0.1.0-rc.6"
+    "@deepseek-ai/cordis": "~4.0.4",
+    "@deepseek-ai/dsh-launch-environment": ">=0.2.0-rc.2 <0.2.1 || >=0.2.1-rc.1 <0.3.0-0",
+    "@deepseek-ai/dsh-web": ">=0.2.0-rc.2 <0.2.1 || >=0.2.1-rc.1 <0.3.0-0"
   },
   "dependencies": {
-    "@deepseek-ai/schemastery": "3.18.1"
+    "@deepseek-ai/schemastery": "3.18.5"
   },
   "devDependencies": {
-    "@deepseek-ai/cordis": "4.0.1",
-    "@deepseek-ai/dsh-launch-environment": "0.1.0-rc.6",
-    "@deepseek-ai/dsh-llm": "0.1.0-rc.6",
-    "@deepseek-ai/dsh-system-prompt": "0.1.0-rc.6",
-    "@deepseek-ai/dsh-tool-web": "0.1.0-rc.6",
-    "@deepseek-ai/dsh-tools": "0.1.0-rc.6",
-    "@deepseek-ai/dsh-web": "0.1.0-rc.6",
-    "@types/node": "26.2.0",
-    "js-yaml": "4.2.0",
-    "tsdown": "0.22.2",
+    "@deepseek-ai/cordis": "4.0.5",
+    "@deepseek-ai/dsh-launch-environment": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-llm": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-system-prompt": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-tool-web": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-tools": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-web": "0.2.1-rc.2",
+    "@types/node": "26.6.5",
+    "js-yaml": "5.5.0",
+    "tsdown": "0.23.1",
     "typescript": "6.0.3",
-    "vitest": "4.1.8"
+    "vitest": "5.0.5"
   }
 }

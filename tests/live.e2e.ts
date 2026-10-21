@@ -63,7 +63,7 @@ describe('live Firecrawl fetch', () => {
 
     expect(result.statusCode).toBe(200)
     expect(result.body.kind).toBe('text')
-    expect(result.body.content).toContain('Example Domain')
+    expect(result.body.content).toContain('documentation examples')
     expect(result.truncated).toBe(false)
     report('fetch', { statusCode: result.statusCode, kind: result.body.kind, chars: result.body.content.length })
   }, 90_000)

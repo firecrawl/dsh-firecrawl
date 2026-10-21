@@ -14,7 +14,10 @@ export const FIRECRAWL_DEFAULT_BASE_URL = 'https://api.firecrawl.dev'
 export const FIRECRAWL_PROVIDER_ID = 'firecrawl'
 
 /** Attribution header sent on every request. Bump with the package version. */
-export const USER_AGENT = '@firecrawl/dsh-firecrawl/0.1.0 (+https://github.com/firecrawl/dsh-firecrawl)'
+export const USER_AGENT = '@firecrawl/dsh-firecrawl/0.2.0 (+https://github.com/firecrawl/dsh-firecrawl)'
+
+/** Integration tag sent in the JSON body of every Firecrawl request. */
+export const FIRECRAWL_INTEGRATION = '_dsh_firecrawl'
 
 /** A Firecrawl response envelope: `success` plus the failure detail fields. */
 interface Envelope {
@@ -38,7 +41,7 @@ interface Envelope {
  *
  * @param endpoint - the absolute URL of the Firecrawl operation.
  * @param apiKey - the bearer credential.
- * @param body - the JSON request body.
+ * @param body - the JSON request body; {@link FIRECRAWL_INTEGRATION} is added to it.
  * @param label - operation name used in error messages ("Firecrawl search").
  * @param signal - optional cancellation signal.
  * @returns the parsed response envelope, guaranteed `success !== false`.
@@ -46,7 +49,7 @@ interface Envelope {
 export async function postFirecrawl<T extends Envelope>(
   endpoint: string,
   apiKey: string,
-  body: unknown,
+  body: Record<string, unknown>,
   label: string,
   signal?: AbortSignal,
 ): Promise<T> {
@@ -61,7 +64,7 @@ export async function postFirecrawl<T extends Envelope>(
         'accept': 'application/json',
         'user-agent': USER_AGENT,
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify({ ...body, integration: FIRECRAWL_INTEGRATION }),
       ...signal !== undefined ? { signal } : {},
     })
   } catch (error: unknown) {
